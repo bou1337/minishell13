@@ -42,6 +42,7 @@ void run_exuc(t_data *data, char **env, t_env *envp)
 	}
 	if (pid == 0)
 	{
+		
 	    signal(SIGINT, child_handler);
 		signal(SIGQUIT, child_handler1);
 		run_exuc(data, env, *envp);

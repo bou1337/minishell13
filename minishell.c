@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		len = readline("minshell $ ");
+		len = readline("minishell $ ");
 		if (ft_minishell(data, &envp, len))
 			break ;
 	}

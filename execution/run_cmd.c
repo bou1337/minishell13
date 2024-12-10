@@ -16,11 +16,9 @@ int count_cmd(t_data *data)
 }
 void run_cmd(t_data **data, char **env, t_env **envp)
 {
+  int nb_cmd ;
   if(!*data)
-  return ;
-    int nb_cmd ;
-      if(!*data)
-    return  ;
+    return ;
 	g.data = *data;
 	g.env = *envp;
 	g.var = NULL;
