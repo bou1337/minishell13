@@ -1,4 +1,3 @@
-
 #include "minishell.h"
 
 
@@ -80,16 +79,11 @@ void input_output_free(t_data *data, t_us_var *var)
 
 	if(int_out_file(data,var))
 	{
-
-		/////////
-		/////////
-		//////////
-
-
-
-		///////
-		//free  all data here please ;
-		exit(1) ;
+        free_data(data);
+		free_envp(var->envp);
+		free_var(var);
+		rl_clear_history();
+		exit(1);
 
 	}
 }

@@ -1,6 +1,19 @@
 #include "minishell.h"
 
 
+
+void	ft_execve(t_data *data, t_us_var var, t_env *envp, char **env)
+{
+	if (execve(var.path_cmd, data->cmd, env) == -1)
+	{
+		free_data(data);
+		free_envp(envp);
+		ft_free1(var.path_spt);
+		free_var(&var);
+		exit(1);
+	}
+}
+
 void run_exuc(t_data *data, char **env, t_env *envp)
 {
 	t_us_var	var;
@@ -21,10 +34,9 @@ void run_exuc(t_data *data, char **env, t_env *envp)
 		dup2(var.outfd, 1);
 		close(var.outfd);
 	}
-	execve(var.path_cmd, data->cmd, env) ;
+ ft_execve(data, var, envp, env);
+
 }
-
-
  void run_one_cmd(t_data *data, char **env,t_env **envp )
  {
     

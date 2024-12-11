@@ -42,7 +42,7 @@ void run_second_cmd(t_data *data ,t_us_var var, char **env , t_env **envp)
 	}
 	else
 		dup2(var.pipe[var.i - 1][0], 0);
-	if (var.outfd != -2)
+	if (var.outfd != -13)
 	{
 		dup2(var.outfd, 1);
 		close(var.outfd);
@@ -83,7 +83,7 @@ void run_cmd_as_child(t_data *data,  t_us_var var, char **env , t_env **envp)
 {
     if(var.i==0)
     run_first_cmd(data, var, env, envp) ;
-    if(var.i>0 && var.i < var.count_cmd-1)
+    if( var.i < var.count_cmd-1)
     run_second_cmd(data , var, env , envp);
     else 
     run_last_cmd(data,var, env, envp) ;

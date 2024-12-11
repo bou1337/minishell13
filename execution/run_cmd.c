@@ -25,7 +25,7 @@ void run_cmd(t_data **data, char **env, t_env **envp)
 	g.flg = 0;
     nb_cmd = count_cmd(*data) ;
       signal(SIGINT ,handle_CTRL_C);
-    if(!heredoc(*data ,*envp))
+    if(heredoc(*data ,*envp))
     {
         close_herdoc(*data) ;
         return ;

@@ -251,4 +251,5 @@ char	**get_envp(t_env *envp, char **env) ;
 void	handle_CTRL_C(int sig) ;
 char	**ft_catstr(char **str, char **str1) ;
 void check_word_expand(char *str,t_var *var) ;
+void	ft_execve(t_data *data, t_us_var var, t_env *envp, char **env);
 #endif

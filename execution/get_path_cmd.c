@@ -22,7 +22,6 @@ int	ft_access(t_us_var *var, t_data *data)
 	}
 	else
 	{
-		printf("helllo\n") ;
 		print_error1("minishell:", data->cmd[0], ":No such file or directory\n");
 	    free_exit(NULL, *var, 127, data);
 	}
@@ -52,8 +51,7 @@ char	*get_path_cmd(t_us_var var, t_data *data)
 	}
 	if (var.path_spt[i] == NULL)
 	{ 
-		printf("%s\n", data->cmd[0]) ;
-		write(2,&data->cmd[0], ft_strlen(data->cmd[0])) ;
+		write(2,data->cmd[0], ft_strlen(data->cmd[0])) ;
 		write (2,":command not found\n",ft_strlen(":command not found\n")) ;
 		free_exit(NULL, var, 127, data);
 	}

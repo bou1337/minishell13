@@ -57,7 +57,7 @@ int	ft_minishell(t_data *data, t_env **envp, char *len)
 	add_history(len);
 	if (!check_quote(len))
 	{
-		printf("syntax error\n");
+		write(2,"syntax error\n",ft_strlen("syntax error\n"));
 		free(len);
 	}
 	else
@@ -82,8 +82,8 @@ int	main(int ac, char **av, char **env)
 	data = NULL;
 	if (ac > 1 || !av)
 	{
-		printf("just one ergument\n");
-		return (0);
+		print_error1("minishell: ",av[1],": No such file or directory");
+		exit(127) ;
 	}
 	initialize_environment(env, &envp);
 	signal(SIGINT, handle_CTRL_C);

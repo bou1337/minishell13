@@ -17,8 +17,8 @@ void	ft_exit(t_data *data, t_env *envp)
 		exit_s = ft_atoi(data->cmd[1]);
 	if (g.flg != 1)
 		printf("exit\n");
-	//free_data(data);
-	//free_envp(envp);
-	//free_var(g.flg);
+	free_data(data);
+	free_envp(envp);
+	free_var(g.var);
 	exit(exit_s);
 }

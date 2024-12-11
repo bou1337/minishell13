@@ -45,8 +45,8 @@ void	wait_for_children(t_us_var var, t_env *envp)
 
 void	free_node(t_data *tmp)
 {
-	//free_file(tmp->file);
-	//ft_free1(tmp->cmd);
+	free_file(tmp->file);
+	ft_free1(tmp->cmd);
 	free(tmp);
 }
 

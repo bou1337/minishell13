@@ -14,7 +14,7 @@ int	run_builtin_in_pipe(t_data *data, t_env **envp, t_us_var var)
 		flag = 1;
 	if (flag == 1)
 	{
-		if (var.outfd != -2)
+		if (var.outfd != -13)
 			dup2(var.outfd, 1);
 		else if (var.i < var.count_cmd - 1)
 		{

@@ -32,10 +32,14 @@ void free_file(t_file *file)
 
 void	free_exit(char *str, t_us_var var, int n, t_data *data)
 {
-	(void)data;
-	double_free(var.path_spt) ;
-	write(2,str,ft_strlen(str)) ;
-	exit(n)  ;
+	ft_free1(var.path_spt);
+	if (str != NULL)
+		printf("%s", str);
+	free_data(data);
+	free_envp(var.envp);
+	free_var(&var);
+	rl_clear_history();
+	exit(n);
 
 }
 

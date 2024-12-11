@@ -46,6 +46,7 @@ t_data	*ft_parsing(t_lexer *lexer, t_env *envp)
 			apend_to_data(&data, &var.file, &var.cmd);
 		else if (lexer->type == WO_RD)
 			var.cmd = ft_addstring(var.cmd, lexer, envp);
+		
 		lexer = lexer->next;
 	}
 	apend_to_data(&data, &var.file, &var.cmd);

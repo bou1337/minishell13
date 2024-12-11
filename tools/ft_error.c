@@ -1,8 +1,6 @@
 
 #include "minishell.h"
-
-
-
+ extern  t_global  g ; 
 int	syntax_error1(t_lexer *lexer)
 {
 	while (lexer->next)
