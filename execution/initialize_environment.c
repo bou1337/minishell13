@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize_environment.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:14:46 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:14:50 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	update_shell_level(t_env *envp)
@@ -19,7 +31,7 @@ void	update_shell_level(t_env *envp)
 			level_value = ft_itoa(shell_level);
 			envp->value = ft_strjoin("=", level_value);
 			free(level_value);
-			return;
+			return ;
 		}
 		envp = envp->next;
 	}
@@ -32,7 +44,7 @@ void	add_default_path(t_env **envp)
 
 	new_node = ft_calloc(sizeof(t_env), 1);
 	if (new_node == NULL)
-		return;
+		return ;
 	new_node->var = ft_strdup("PATH");
 	new_node->value = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
 	new_node->egnor = 1;
@@ -48,7 +60,7 @@ void	initialize_environment(char **env, t_env **envp)
 	i = -1;
 	*envp = ft_calloc(sizeof(t_env), 1);
 	if (*envp == NULL)
-		return;
+		return ;
 	if (*env == NULL)
 	{
 		cwd = getcwd(NULL, 0);
@@ -60,7 +72,7 @@ void	initialize_environment(char **env, t_env **envp)
 		ft_add_env_var("SHLVL=1", envp);
 		ft_add_env_var("OLDPWD", envp);
 		ft_add_env_var("_=/usr/bin/env", envp);
-		return;
+		return ;
 	}
 	while (env[++i])
 		ft_add_env_var(env[i], envp);
@@ -72,7 +84,7 @@ void	ft_add_node_to_env_list(t_env **env, t_env *new_node)
 	t_env	*tmp;
 
 	if (!env || !new_node)
-		return;
+		return ;
 	if (*env)
 	{
 		tmp = *env;
@@ -140,15 +152,14 @@ void	ft_add_env_var(char *env_var, t_env **envp)
 	if (value)
 		value = ft_strdup(value);
 	if (update_existing_variable(var_name, value, *envp))
-		return;
+		return ;
 	else
 	{
 		new_env = ft_calloc(sizeof(t_env), 1);
 		if (!new_env)
-			return;
+			return ;
 		new_env->value = value;
 		new_env->var = var_name;
 		ft_add_node_to_env_list(envp, new_env);
 	}
 }
-

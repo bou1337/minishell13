@@ -19,7 +19,7 @@ void	ft_print(t_env *s1)
 	if (s1->var && !s1->egnor && ft_strcmp(s1->var, "_"))
 	{
 		printf("declare -x ");
-			printf("%s", s1->var);
+		printf("%s", s1->var);
 		if (s1->value)
 		{
 			printf("%c", s1->value[0]);

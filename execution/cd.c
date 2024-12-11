@@ -1,5 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:14:12 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:14:18 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 void	handle_no_argument(t_env *env, char *tmp)
 {
@@ -30,15 +41,15 @@ void	handle_no_argument(t_env *env, char *tmp)
 		write(2, "minishell: cd: HOME not set\n", 23);
 }
 
-void change_and_free(char *oldpwd,char *newpwd,char *str,t_env *env)
+void	change_and_free(char *oldpwd, char *newpwd, char *str, t_env *env)
 {
-		ft_add_env_var(oldpwd, &env);
-		ft_add_env_var(newpwd, &env);
-		free(newpwd);
-		free(oldpwd);
-		if (env->pwd)
-			free (env->pwd);
-		env->pwd = str;
+	ft_add_env_var(oldpwd, &env);
+	ft_add_env_var(newpwd, &env);
+	free(newpwd);
+	free(oldpwd);
+	if (env->pwd)
+		free(env->pwd);
+	env->pwd = str;
 }
 
 int	handle_change_directory(t_data *data, t_env *env, char *tmp)
@@ -64,7 +75,7 @@ int	handle_change_directory(t_data *data, t_env *env, char *tmp)
 		}
 		newpwd = ft_strjoin("PWD=", str);
 		oldpwd = ft_strjoin("OLDPWD=", tmp);
-		change_and_free(oldpwd,newpwd,str,env);
+		change_and_free(oldpwd, newpwd, str, env);
 	}
 	return (0);
 }
@@ -80,7 +91,8 @@ int	cd(t_data *data, t_env *env)
 	}
 	if (data->cmd[2] != NULL)
 	{
-		write(2, "minishell: cd: too many arguments\n",ft_strlen("minishell: cd: too many arguments\n"));
+		write(2, "minishell: cd: too many arguments\n",
+			ft_strlen("minishell: cd: too many arguments\n"));
 		return (1);
 	}
 	if (handle_change_directory(data, env, tmp))

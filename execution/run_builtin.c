@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_builtin.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:25:29 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:25:32 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int other_builtin(t_data *data , t_env **envp)
+int	other_builtin(t_data *data, t_env **envp)
 {
-    if (ft_strcmp(data->cmd[0], "env") == 0)
+	if (ft_strcmp(data->cmd[0], "env") == 0)
 	{
 		(*envp)->exit = env(data, *envp);
 		return (1);
@@ -18,11 +29,9 @@ int other_builtin(t_data *data , t_env **envp)
 	return (0);
 }
 
-
-int run_builtin(t_data *data, t_env **envp)
+int	run_builtin(t_data *data, t_env **envp)
 {
-
-    if (ft_strcmp(data->cmd[0], "echo") == 0)
+	if (ft_strcmp(data->cmd[0], "echo") == 0)
 	{
 		(*envp)->exit = echo(data);
 		return (1);
@@ -46,4 +55,3 @@ int run_builtin(t_data *data, t_env **envp)
 		return (1);
 	return (0);
 }
-

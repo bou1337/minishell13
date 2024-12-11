@@ -1,8 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:25:08 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:25:14 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-extern  t_global g ;
+extern t_global	g;
 void	free_herdoc(int exit_s, char *str)
 {
 	if (str)
@@ -12,32 +22,28 @@ void	free_herdoc(int exit_s, char *str)
 	clear_history();
 	exit(exit_s);
 }
-int count_heredoc(t_data *data)
+int	count_heredoc(t_data *data)
 {
+	t_file	*file;
+	int		c;
 
-    t_file *file ;
-    int c ;
-    c = 0 ;
-    while(data)
-    {
-        file = data->file ;
-        while(file)
-        {
-            if(file->heredoc)
-            c++ ;
-            file=file->next ;
-        }
-
-        data = data ->next ;
-    }
-
-    return (c) ;
+	c = 0;
+	while (data)
+	{
+		file = data->file;
+		while (file)
+		{
+			if (file->heredoc)
+				c++;
+			file = file->next;
+		}
+		data = data->next;
+	}
+	return (c);
 }
 
-
-void read_from_heredoc(t_file *file, t_env *env)
+void	read_from_heredoc(t_file *file, t_env *env)
 {
-    
 	char	*line;
 
 	signal(SIGINT, f);
@@ -65,8 +71,7 @@ void read_from_heredoc(t_file *file, t_env *env)
 	}
 }
 
-
- int 	wait_children(int pid, t_file *newfile)
+int	wait_children(int pid, t_file *newfile)
 {
 	int	status;
 
@@ -80,43 +85,41 @@ void read_from_heredoc(t_file *file, t_env *env)
 	close(newfile->fd[1]);
 	return (0);
 }
-int heredoc(t_data *data, t_env *env)
+int	heredoc(t_data *data, t_env *env)
 {
+	t_file	*file;
+	int		pid;
 
-    t_file *file ;
-    int pid ;
-    if(count_heredoc(data)>16)
-    {
-        //ft_putstr("minishell: maximum here-document count exceeded") ;
-        free_herdoc(2, "maximum here-document count exceeded");
-        ///freee to do please do no forget .........
-        exit(2) ;
-    }
-    while(data)
-    {
-        file = data->file ;
-        while(file)
-        {
-            if(file->heredoc==1)
-            {
-            pipe(file->fd);
-            pid = fork() ;
-            if(pid==0)
-            {
-               // printf("hii\n") ;
-                //signal don't forgr  again please ..
-                read_from_heredoc(file, env) ;
-            }
-            if(wait_children(pid, file))
-            return (1) ;
-            }
-            file = file->next ;
-        }
-        data = data->next ;
-
-    }
-
-    return(0) ;
+	if (count_heredoc(data) > 16)
+	{
+		// ft_putstr("minishell: maximum here-document count exceeded") ;
+		free_herdoc(2, "maximum here-document count exceeded");
+		/// freee to do please do no forget .........
+		exit(2);
+	}
+	while (data)
+	{
+		file = data->file;
+		while (file)
+		{
+			if (file->heredoc == 1)
+			{
+				pipe(file->fd);
+				pid = fork();
+				if (pid == 0)
+				{
+					// printf("hii\n") ;
+					// signal don't forgr  again please ..
+					read_from_heredoc(file, env);
+				}
+				if (wait_children(pid, file))
+					return (1);
+			}
+			file = file->next;
+		}
+		data = data->next;
+	}
+	return (0);
 }
 
 void	close_herdoc(t_data *data)

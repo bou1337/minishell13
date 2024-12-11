@@ -1,12 +1,18 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_cmd_with_pipe.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:20:45 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:21:08 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global  g ;
-
-//////freeeee node 
-
-
+extern t_global	g;
 
 void	close_pipes(t_us_var var)
 {
@@ -59,22 +65,23 @@ void	init_pipe(t_us_var *var, t_data *data)
 	var->pipe = ft_calloc(sizeof(int *), var->count_cmd + 1);
 	if (var->id == NULL || !var->pipe)
 		return ;
-	g.var = var ;
+	g.var = var;
 }
-void run_cmd_with_pipe(t_data **data,char **env, t_env **envp)
+void	run_cmd_with_pipe(t_data **data, char **env, t_env **envp)
 {
-    t_us_var var ;
-    t_data   *tmp ;
-	init_pipe(&var, *data) ;
-while (var.i < var.count_cmd)
+	t_us_var	var;
+	t_data		*tmp;
+
+	init_pipe(&var, *data);
+	while (var.i < var.count_cmd)
 	{
 		var.pipe[var.i] = malloc(sizeof(int *) * 2);
 		if (var.i < var.count_cmd - 1)
-		var.d = pipe(var.pipe[var.i]);
+			var.d = pipe(var.pipe[var.i]);
 		var.id[var.i] = fork();
 		if (var.id[var.i] == -1 || var.d == -1)
 		{
-	    	perror(NULL);
+			perror(NULL);
 			return ;
 		}
 		if (var.id[var.i] == 0)
@@ -85,5 +92,5 @@ while (var.i < var.count_cmd)
 		free_node(*data);
 		*data = tmp;
 	}
-	wait_for_children(var,*envp) ;
+	wait_for_children(var, *envp);
 }

@@ -1,5 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   int_out_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:16:24 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:16:27 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "minishell.h"
 
 int	ambiguous(t_file *file)
 {
@@ -11,9 +22,8 @@ int	ambiguous(t_file *file)
 	return (0);
 }
 
-int input_file(t_file *file,t_us_var *var)
+int	input_file(t_file *file, t_us_var *var)
 {
-   
 	if (file->infile == 1)
 	{
 		if (var->inpfd != -13)
@@ -30,7 +40,7 @@ int input_file(t_file *file,t_us_var *var)
 		return (1);
 	return (0);
 }
-int output_file(t_file *file, t_us_var *var)
+int	output_file(t_file *file, t_us_var *var)
 {
 	if (file->outfile == 1)
 	{
@@ -49,17 +59,16 @@ int output_file(t_file *file, t_us_var *var)
 	return (0);
 }
 
-
-int int_out_file(t_data *data, t_us_var *var)
+int	int_out_file(t_data *data, t_us_var *var)
 {
-    t_file	*file;
+	t_file	*file;
 
 	file = data->file;
 	var->inpfd = -13;
 	var->outfd = -13;
 	while (file)
 	{
-		if (input_file(file, var) || output_file(file,var))
+		if (input_file(file, var) || output_file(file, var))
 		{
 			perror(file->name);
 			return (1);
@@ -71,19 +80,16 @@ int int_out_file(t_data *data, t_us_var *var)
 		file = file->next;
 	}
 	return (0);
-
 }
 
-void input_output_free(t_data *data, t_us_var *var)
+void	input_output_free(t_data *data, t_us_var *var)
 {
-
-	if(int_out_file(data,var))
+	if (int_out_file(data, var))
 	{
-        free_data(data);
+		free_data(data);
 		free_envp(var->envp);
 		free_var(var);
 		rl_clear_history();
 		exit(1);
-
 	}
 }

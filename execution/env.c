@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:17:35 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:17:38 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
+
 void	print(t_env *envp)
 {
 	while (envp)
@@ -13,7 +25,7 @@ void	print(t_env *envp)
 	}
 }
 
-int env(t_data *data, t_env *evnp)
+int	env(t_data *data, t_env *evnp)
 {
 	if (data->cmd[1] == NULL)
 		print(evnp);

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:25:49 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:25:51 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -23,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	ft_memcpy(join, s1, i);
 	ft_memcpy(join + i, s2, j);
-	 join[i + j] = '\0';
+	join[i + j] = '\0';
 	return (join);
 }
 
@@ -58,10 +69,8 @@ void	*ft_memset(void *ptr, int c, size_t s)
 	return (ptr);
 }
 
-
-char *join_wih_path(char *s1, char *s2)
+char	*join_wih_path(char *s1, char *s2)
 {
-
 	char	*s;
 	size_t	i;
 	size_t	j;
@@ -81,8 +90,6 @@ char *join_wih_path(char *s1, char *s2)
 	s[j + i] = '\0';
 	return (s);
 }
-
-
 
 int	check_rest(char *str, int i, int res, int sign)
 {
@@ -133,4 +140,3 @@ int	ft_atoi(char *str)
 	}
 	return (check_rest(str, i, res, sign));
 }
-

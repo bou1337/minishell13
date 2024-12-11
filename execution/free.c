@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:16:03 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:16:07 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	double_free(char **str)
@@ -15,9 +27,8 @@ void	double_free(char **str)
 	free(str);
 }
 
-void free_file(t_file *file)
+void	free_file(t_file *file)
 {
-
 	t_file	*tmp;
 
 	while (file)
@@ -29,7 +40,6 @@ void free_file(t_file *file)
 	}
 }
 
-
 void	free_exit(char *str, t_us_var var, int n, t_data *data)
 {
 	ft_free1(var.path_spt);
@@ -40,7 +50,6 @@ void	free_exit(char *str, t_us_var var, int n, t_data *data)
 	free_var(&var);
 	rl_clear_history();
 	exit(n);
-
 }
 
 void	free_var(t_us_var *var)
@@ -71,8 +80,6 @@ void	free_and_exit(t_data *data, t_us_var var, t_env *envp, int exit_s)
 	rl_clear_history();
 	exit(exit_s);
 }
-
-
 
 void	free_data(t_data *data)
 {

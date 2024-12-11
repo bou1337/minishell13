@@ -1,8 +1,5 @@
 #include "minishell.h"
 
-
-
-
 //  run the   builting here  please .......................................
 void	dup_and_run(t_data *data, t_us_var var, t_env **envp, int flag)
 {
@@ -31,11 +28,10 @@ int	is_builtin_command(char *cmd)
 	return (1);
 }
 
-int run_one_builtin(t_data *data, t_env **envp)
+int	run_one_builtin(t_data *data, t_env **envp)
 {
-
-	int			flag;
-	t_us_var	var;
+	int flag;
+	t_us_var var;
 
 	flag = 0;
 	if (!data->cmd || !data->cmd[0])

@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   run_one_cmd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:15:28 by iait-bou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:15:31 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-
 
 void	ft_execve(t_data *data, t_us_var var, t_env *envp, char **env)
 {
@@ -14,9 +24,10 @@ void	ft_execve(t_data *data, t_us_var var, t_env *envp, char **env)
 	}
 }
 
-void run_exuc(t_data *data, char **env, t_env *envp)
+void	run_exuc(t_data *data, char **env, t_env *envp)
 {
 	t_us_var	var;
+
 	var.envp = envp;
 	var.pipe = NULL;
 	var.id = NULL;
@@ -34,31 +45,28 @@ void run_exuc(t_data *data, char **env, t_env *envp)
 		dup2(var.outfd, 1);
 		close(var.outfd);
 	}
- ft_execve(data, var, envp, env);
-
+	ft_execve(data, var, envp, env);
 }
- void run_one_cmd(t_data *data, char **env,t_env **envp )
- {
-    
-    int pid ;
-    int status  ;
-    status = 0 ;
-    if(run_one_builtin(data, envp))
-    return ;
-    pid = fork() ;
-    if (pid == -1)
+void	run_one_cmd(t_data *data, char **env, t_env **envp)
+{
+	int	pid;
+	int	status;
+
+	status = 0;
+	if (run_one_builtin(data, envp))
+		return ;
+	pid = fork();
+	if (pid == -1)
 	{
 		perror("fork");
 		return ;
-		
 	}
 	if (pid == 0)
 	{
-		
-	    signal(SIGINT, child_handler);
+		signal(SIGINT, child_handler);
 		signal(SIGQUIT, child_handler1);
 		run_exuc(data, env, *envp);
 	}
-   waitpid(pid, &status, 0);
-   check_status(status, *envp);
- }
+	waitpid(pid, &status, 0);
+	check_status(status, *envp);
+}

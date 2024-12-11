@@ -9,21 +9,22 @@ int	ft_access(t_us_var *var, t_data *data)
 		var->fd = open(data->cmd[0], O_CREAT);
 		if (var->fd == -1)
 		{
-			printf("heree1\n") ;
+			printf("heree1\n");
 			perror(data->cmd[0]);
 			free_exit(NULL, *var, 126, data);
 		}
 		close(var->fd);
 		if (access(data->cmd[0], X_OK) == -1)
 		{
-			print_error1("minishell:",data->cmd[0], "permission denied\n" );
+			print_error1("minishell:", data->cmd[0], "permission denied\n");
 			free_exit(NULL, *var, 126, data);
 		}
 	}
 	else
 	{
-		print_error1("minishell:", data->cmd[0], ":No such file or directory\n");
-	    free_exit(NULL, *var, 127, data);
+		print_error1("minishell:", data->cmd[0],
+			":No such file or directory\n");
+		free_exit(NULL, *var, 127, data);
 	}
 	return (1);
 }
@@ -50,9 +51,9 @@ char	*get_path_cmd(t_us_var var, t_data *data)
 		free(var.path_cmd);
 	}
 	if (var.path_spt[i] == NULL)
-	{ 
-		write(2,data->cmd[0], ft_strlen(data->cmd[0])) ;
-		write (2,":command not found\n",ft_strlen(":command not found\n")) ;
+	{
+		write(2, data->cmd[0], ft_strlen(data->cmd[0]));
+		write(2, ":command not found\n", ft_strlen(":command not found\n"));
 		free_exit(NULL, var, 127, data);
 	}
 	return (NULL);
