@@ -1,7 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_expending.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:52:28 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:52:31 by soel-mou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	add_to_str(char *str, t_var *var)
 {
@@ -26,7 +35,7 @@ void	expand_var(t_var *var, t_env *envp, int flag)
 
 	path = ft_getenv(envp, var->var);
 	free(var->var);
-	if (path && var->sinqot == 1 && var->dobqot == 1 &&(flag || var->flg))
+	if (path && var->sinqot == 1 && var->dobqot == 1 && (flag || var->flg))
 	{
 		str1 = ft_split_it(path);
 		var->newstr = ft_catstr(var->newstr, str1);
@@ -84,7 +93,7 @@ char	**ft_expending_word(char *str, t_env *envp, int flg)
 	var.newstr = ft_calloc(sizeof(char *), 2);
 	if (!var.newstr)
 		return (NULL);
-	check_word_expand (str,&var);
+	check_word_expand(str, &var);
 	while (str[var.i])
 	{
 		var.var = NULL;

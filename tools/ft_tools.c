@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tools.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:53:58 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/11 21:00:45 by soel-mou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_copy(char **cmd, char **str)
@@ -12,8 +24,6 @@ int	ft_copy(char **cmd, char **str)
 	}
 	return (i);
 }
-
-
 
 int	count_list(t_data *data)
 {
@@ -50,17 +60,52 @@ char	**ft_addstring(char **str, t_lexer *lexer, t_env *envp)
 	return (var.cmd);
 }
 
-void	ft_putstr(char *str)
+static int	cont_w(const char *str, char c)
 {
 	int	i;
+	int	count;
 
-	if (!str)
-		return ;
 	i = 0;
-	while (str[i])
+	if (!str)
+		return (0);
+	count = 0;
+	while (str[i] != '\0')
 	{
-		write(2, &str[i], 1);
-		i++;
+		if (str[i] != c && str[i] != '\t')
+		{
+			count++;
+			while (str[i] != '\0' && str[i] != c && str[i] != '\t')
+				i++;
+		}
+		else if (str[i] == c || str[i] == '\t')
+			i++;
 	}
+	return (count);
 }
 
+char	**ft_split(char *s, char c)
+{
+	char	**p;
+	int		i;
+	int		j;
+	int		n;
+
+	n = 0;
+	i = 0;
+	p = (char **)malloc((cont_w(s, c) + 1) * sizeof(char *));
+	if (!p)
+		return (NULL);
+	while (s != NULL && s[i] != '\0')
+	{
+		while (s[i] == c || s[i] == '\t')
+			i++;
+		if (s[i] == '\0')
+			break ;
+		j = 0;
+		while (s[i] != c && s[i] != '\t' && s[i] != '\0' && j++ >= 0)
+			i++;
+		p[n++] = ft_substr(s, i - j, j);
+	}
+	p[n] = NULL;
+	return (p);
+}

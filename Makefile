@@ -34,18 +34,19 @@ SRC =minishell.c \
 	execution/run_builtin.c \
 	execution/run_one_builtin.c \
 	execution/utils1.c \
+	execution/utils2.c\
 	execution/signal.c \
-      parsing/ft_expending.c \
+    parsing/ft_expending.c \
 	parsing/ft_expand_her.c \
 	parsing/lexer.c \
 	parsing/parsing.c\
 	parsing/apend_in_struct.c \
-      tools/ft_error.c \
-	tools/ft_fun1.c \
+    tools/ft_error.c \
+	tools/ft_is.c \
 	tools/ft_catstr.c\
-	tools/ft_fun2.c \
-	tools/ft_fun3.c \
-	tools/ft_fun4.c \
+	tools/ft_strs.c \
+	tools/ft_alloc.c \
+	tools/ft_str.c \
 	tools/ft_helper.c \
 	tools/ft_signals.c \
 	tools/ft_tools.c \

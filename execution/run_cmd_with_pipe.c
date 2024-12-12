@@ -6,7 +6,7 @@
 /*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:20:45 by iait-bou          #+#    #+#             */
-/*   Updated: 2024/12/11 19:21:08 by iait-bou         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:30:10 by iait-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@ void	check_status(int status, t_env *envp)
 	{
 		envp->exit = 128 + WTERMSIG(status);
 		if (envp->exit == 131)
-			write(2, "Quit (core dumped\n", 19);
+			write(2, "Quit (core dumped)\n", 20);
 		else if (envp->exit == 130)
 			write(1, "\n", 1);
 	}
 	else
 		envp->exit = WEXITSTATUS(status);
 }
+
 void	wait_for_children(t_us_var var, t_env *envp)
 {
 	int	status;
@@ -49,13 +50,6 @@ void	wait_for_children(t_us_var var, t_env *envp)
 	free_var(&var);
 }
 
-void	free_node(t_data *tmp)
-{
-	free_file(tmp->file);
-	ft_free1(tmp->cmd);
-	free(tmp);
-}
-
 void	init_pipe(t_us_var *var, t_data *data)
 {
 	g.flg = 1;
@@ -67,6 +61,7 @@ void	init_pipe(t_us_var *var, t_data *data)
 		return ;
 	g.var = var;
 }
+
 void	run_cmd_with_pipe(t_data **data, char **env, t_env **envp)
 {
 	t_us_var	var;

@@ -1,11 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_catstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:53:12 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:53:15 by soel-mou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-
-
-void check_word_expand(char *str,t_var *var)
+void	check_word_expand(char *str, t_var *var)
 {
-	int i;
+	int	i;
+
 	i = 0;
 	var->flg = 0;
 	while (str[i] && str[i] != '=')
@@ -45,4 +55,3 @@ char	**ft_catstr(char **str, char **str1)
 	ft_free1(str1);
 	return (var.newstr);
 }
-

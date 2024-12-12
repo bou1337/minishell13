@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:52:34 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/11 20:37:07 by soel-mou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
 
 int	ft_outred(t_lexer **lexer, char *len)
 {
@@ -69,7 +79,6 @@ int	ft_word(t_lexer **lexer, char *len)
 	apend_in_struct(lexer, str, WO_RD);
 	return (i);
 }
-
 
 void	ft_lexer(char *len, t_lexer **lexer)
 {

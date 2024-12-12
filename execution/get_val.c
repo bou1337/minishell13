@@ -32,3 +32,10 @@ char	*get_val(t_env *env, char *str)
 		return (NULL);
 	return (s);
 }
+
+void	free_node(t_data *tmp)
+{
+	free_file(tmp->file);
+	ft_free1(tmp->cmd);
+	free(tmp);
+}

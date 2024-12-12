@@ -1,7 +1,16 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   apend_to_file.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:52:21 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/11 19:52:50 by soel-mou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
-
 
 char	*remove_qout(char *str)
 {
@@ -91,7 +100,7 @@ void	apend_to_file(t_lexer *lexer, int type, t_file **file, t_env *envp)
 		return ;
 	}
 	type_file(type, newfile);
-	newfile->name= namfile[0];
+	newfile->name = namfile[0];
 	free(namfile);
 	ft_lstadd_back1(file, newfile);
 }

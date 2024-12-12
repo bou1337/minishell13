@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: soel-mou <soel-mou@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/11 19:54:02 by soel-mou          #+#    #+#             */
+/*   Updated: 2024/12/12 16:16:30 by iait-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -57,7 +68,7 @@ int	ft_minishell(t_data *data, t_env **envp, char *len)
 	add_history(len);
 	if (!check_quote(len))
 	{
-		write(2,"syntax error\n",ft_strlen("syntax error\n"));
+		write(2, "syntax error\n", ft_strlen("syntax error\n"));
 		free(len);
 	}
 	else
@@ -82,15 +93,16 @@ int	main(int ac, char **av, char **env)
 	data = NULL;
 	if (ac > 1 || !av)
 	{
-		print_error1("minishell: ",av[1],": No such file or directory");
-		exit(127) ;
+		print_error1("minishell: ", av[1], ": No such file or directory");
+		exit(127);
 	}
 	initialize_environment(env, &envp);
-	signal(SIGINT, handle_CTRL_C);
+	signal(SIGINT, handle_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
 		len = readline("minishell $ ");
+
 		if (ft_minishell(data, &envp, len))
 			break ;
 	}

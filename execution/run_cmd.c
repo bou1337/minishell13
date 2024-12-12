@@ -6,13 +6,14 @@
 /*   By: iait-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 19:18:21 by iait-bou          #+#    #+#             */
-/*   Updated: 2024/12/11 19:18:26 by iait-bou         ###   ########.fr       */
+/*   Updated: 2024/12/12 20:39:03 by iait-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern t_global	g;
+
 int	count_cmd(t_data *data)
 {
 	int	c;
@@ -25,6 +26,7 @@ int	count_cmd(t_data *data)
 	}
 	return (c);
 }
+
 void	run_cmd(t_data **data, char **env, t_env **envp)
 {
 	int	nb_cmd;
@@ -36,7 +38,7 @@ void	run_cmd(t_data **data, char **env, t_env **envp)
 	g.var = NULL;
 	g.flg = 0;
 	nb_cmd = count_cmd(*data);
-	signal(SIGINT, handle_CTRL_C);
+	signal(SIGINT, SIG_IGN);
 	if (heredoc(*data, *envp))
 	{
 		close_herdoc(*data);
@@ -48,7 +50,7 @@ void	run_cmd(t_data **data, char **env, t_env **envp)
 			run_one_cmd(*data, env, envp);
 		else
 			run_cmd_with_pipe(data, env, envp);
-		signal(SIGINT, handle_CTRL_C);
+		signal(SIGINT, handle_ctrl_c);
 		close_herdoc(*data);
 	}
 }

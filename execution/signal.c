@@ -14,7 +14,7 @@
 
 extern t_global	g;
 
-void	handle_CTRL_C(int sig)
+void	handle_ctrl_c(int sig)
 {
 	(void)sig;
 	printf("\n");
