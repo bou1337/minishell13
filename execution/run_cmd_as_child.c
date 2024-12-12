@@ -35,7 +35,7 @@ void	run_first_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
 		dup2(var.pipe[var.i][1], 1);
 	close(var.pipe[var.i][0]);
 	close(var.pipe[var.i][1]);
-	execve(var.path_cmd, data->cmd, env);
+   ft_execve(data, var, *envp, env);
 }
 
 void	run_second_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
@@ -63,7 +63,7 @@ void	run_second_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
 	close(var.pipe[var.i - 1][0]);
 	close(var.pipe[var.i][0]);
 	close(var.pipe[var.i][1]);
-	execve(var.path_cmd, data->cmd, env);
+ft_execve(data, var, *envp, env);
 }
 
 void	run_last_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
@@ -87,7 +87,7 @@ void	run_last_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
 		close(var.outfd);
 	}
 	close(var.pipe[var.i - 1][0]);
-	execve(var.path_cmd, data->cmd, env);
+ft_execve(data, var, *envp, env);
 }
 
 void	run_cmd_as_child(t_data *data, t_us_var var, char **env, t_env **envp)
