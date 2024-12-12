@@ -92,6 +92,8 @@ void	run_last_cmd(t_data *data, t_us_var var, char **env, t_env **envp)
 
 void	run_cmd_as_child(t_data *data, t_us_var var, char **env, t_env **envp)
 {
+	signal(SIGINT, handle_ctrl_c);
+	signal(SIGQUIT, SIG_IGN);
 	if (var.i == 0)
 		run_first_cmd(data, var, env, envp);
 	if (var.i < var.count_cmd - 1)
