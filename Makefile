@@ -3,7 +3,7 @@ name = minishell
 
 # Compiler and flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror  #-fsanitize=address -g3  
+CFLAGS = -Wall -Wextra -Werror  -fsanitize=address -g3  
 
 # Directories
 SRC_DIR = .

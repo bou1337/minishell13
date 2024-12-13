@@ -55,8 +55,8 @@ void	init_pipe(t_us_var *var, t_data *data)
 	g.flg = 1;
 	var->i = 0;
 	var->count_cmd = count_cmd(data);
-	var->id = ft_calloc(sizeof(int), var->count_cmd + 1);
-	var->pipe = ft_calloc(sizeof(int *), var->count_cmd + 1);
+	var->id = ft_calloc(sizeof(int), var->count_cmd+1);
+	var->pipe = ft_calloc(sizeof(int *), var->count_cmd +1 );
 	if (var->id == NULL || !var->pipe)
 		return ;
 	g.var = var;
@@ -66,7 +66,8 @@ void	run_cmd_with_pipe(t_data **data, char **env, t_env **envp)
 {
 	t_us_var	var;
 	t_data		*tmp;
-
+     
+	 
 	init_pipe(&var, *data);
 	while (var.i < var.count_cmd)
 	{

@@ -42,6 +42,7 @@ void	run_cmd(t_data **data, char **env, t_env **envp)
 	if (heredoc(*data, *envp))
 	{
 		close_herdoc(*data);
+		(*envp)->exit=130;
 		return ;
 	}
 	if (data)

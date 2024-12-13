@@ -98,6 +98,7 @@ int	heredoc(t_data *data, t_env *env)
 					read_from_heredoc(file, env);
 				if (wait_children(pid, file))
 					return (1);
+				
 			}
 			file = file->next;
 		}
